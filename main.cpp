@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Juego.h"
+#include "Jugadores.h"
 using namespace std;
 
 
 
 int main() {
-	
-	prueba();
+	Juego j;
+	j.prueba();
 	return 0;
 }

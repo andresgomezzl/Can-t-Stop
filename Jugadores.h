@@ -2,7 +2,7 @@
 #define Jugadores_H
 #include <iostream>
 #include <vector>
-
+#include <string>
 using namespace std;
 
 class Jugadores{
@@ -10,11 +10,12 @@ class Jugadores{
     public:
     
     int cantidadJugadores;
-    vector<string> jugador;
+    string nombre;
+    vector <string> jugador;
     
     void bienvenida()
     {
-        cout << "Bienvenido a Can´t Stop " << endl << endl ;
+        cout << "Bienvenidos a Cant Stop " << endl << endl ;
         
         
         while(true)
@@ -25,13 +26,23 @@ class Jugadores{
             
             if(cantidadJugadores>=2 && cantidadJugadores <=4)
             {
-                break;
+                 
+                    for(int i=0; i<cantidadJugadores; i++)
+                    {
+                        cout<< "Ingrese el nombre del jugador " << i+1 << ":"<< endl;
+                        cin >> nombre;
+                        jugador.push_back(nombre);
+                    }
+                    
+                    break;
+                    
             }
             else
             {
                cout << "Rango permitido de jugadores es de 2 a 4, ingresa una opcion valida :)" << endl << endl;
             }
         }
+
         
     }
 };
