@@ -4,31 +4,51 @@
 
 class Fichas{
 public:
-    vector <string> coloresDisponibles{"Rojo", "Azul", "Verde", "Amarillo"};
-    vector  <string> coloresElegidos; //posicion de color respectiva a jugador;
+    vector  <int> coloresElegidos; //posicion de color respectiva a jugador;
     int colorElegido; //Rojo=0; Azul=1; Verde=2; Amarillo=2;
+    vector <bool> disponibilidadColores{true, true, true, true};
+    bool validez;
 
-
-
-    void elegirColores()
+    //NOTA: Este metodo funciona un 94% bien, haciendo casos de prueba hay partes que sugieren error logico, toca revisar
+    void elegirColores(Jugadores &j)
     {
-        Jugadores j;
-        cout << endl;
-        
-        /*#ERROR LOGICO: No se por que benditos este ciclo se ejecuta 8 veces, no se por que toma la variable
-        cantidadJugadores como =8???, wtff, si ejecutan el codigo ustedes van a ver que ese ciclo se repetirá 8 veces
-        #Ayuda
-        */
-        for(int i=0; i<j.cantidadJugadores; i++)
-        {
-            cout << "Jugador " << i+1 << " Por favor elija un color " << endl ;
-
+        coloresElegidos.resize(j.cantidadJugadores);
+       
+        for (int i = 0; i < j.cantidadJugadores; i++) {
+            
+            validez=true;
+            while(validez)
+            {
+              cout << j.jugador[i]<< ", elige un color (1-Rojo, 2-Azul, 3-Verde, 4-Amarillo): " << endl;
+              cin >> colorElegido;
+              if(disponibilidadColores[colorElegido-1]==true)
+              {
+                coloresElegidos[i]=colorElegido-1;
+                disponibilidadColores[colorElegido-1]=false;
+                validez=false;
+              }
+              else
+              {
+                if(colorElegido-1>3 || colorElegido-1<0)
+                {
+                    cout << "Color no valido" << endl << endl;
+                }
+                else
+                {
+                    cout << "Color ya tomado, intente de nuevo" << endl << endl;
+                }
+              }
+            }
         }
 
-        
+        for(int k=0; k<j.jugador.size();k++)
+        {
+            cout << "Identificador de fichas de  " << j.jugador[k] << " es: " << coloresElegidos[k]+1 << endl;
+        }
+        cout << endl;
+
+        cout<< "TABLERO:" << endl << endl;
     }
-
-
 };
 
 #endif
