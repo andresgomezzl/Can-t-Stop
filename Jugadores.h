@@ -3,6 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Tablero.h"
+#include "Dados.h"
+
 using namespace std;
 
 class Jugadores{
@@ -10,8 +13,10 @@ class Jugadores{
     public:
     
     int cantidadJugadores;
+    int posicionElegida;
     string nombre;
     vector <string> jugador;
+    vector <int> identificador;
     
     void bienvenida()
     {
@@ -44,6 +49,29 @@ class Jugadores{
         }
 
         
+    }
+
+    void ponerFicha(Tablero &t)
+    {
+        Dados d;
+        //Solo para probar el metodo de poner ficha (no esta incluida la logica del juego aún)
+        for(int i=0; i<30; i++)
+        {
+            if(i<cantidadJugadores)
+            {
+                cout << "Turno de: " << jugador[i] << endl << endl;
+                d.mostrarDados();
+                d.elegirParejas();
+                cout<< "Elija en que posicion de la fila " << d.pareja1 << " desea colocar su ficha (1-" << t.board[d.pareja1-2].size() << ")" <<endl;
+                cin >> posicionElegida;
+                t.board[d.pareja1-2][posicionElegida-1][i]=i+1;  //i+1 NO va ahí, debe ir el identificador del color elegido
+                t.imprimirTablero();
+            }
+            else
+            {
+              i=-1;
+            }
+        }
     }
 };
 
